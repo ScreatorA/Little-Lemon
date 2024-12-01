@@ -1,7 +1,7 @@
 function Footer() {
   return (
     <footer className='footer'>
-      <ul>
+      <ul className="doormatNavigation">
         Doormat Navigation
         <li>
           <a href=''>Home</a>
@@ -23,7 +23,7 @@ function Footer() {
         </li>
       </ul>
 
-      <ul>
+      <ul className="contact">
         Contact
         <li>
           <a href=''>Adress</a>
@@ -36,7 +36,7 @@ function Footer() {
         </li>
       </ul>
 
-      <ul>
+      <ul className="socialMediaLinks">
         Social Media Links
         <li>
           <a href=''>Adress</a>
