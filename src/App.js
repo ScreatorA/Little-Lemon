@@ -5,15 +5,14 @@ import Main from "./Main";
 import Footer from "./Footer";
 
 function App() {
-  return(
-  <>
-    <Header />
-    <Nav />
-    <Main />
-    <Footer />
-  </>
-  )
-
+  return (
+    <>
+      <Header />
+      <Nav />
+      <Main />
+      <Footer />
+    </>
+  );
 }
 
 export default App;

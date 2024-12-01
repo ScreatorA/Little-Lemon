@@ -1,7 +1,4 @@
-function Header()
-{
-    return(
-        <header>Header</header>
-    )
+function Header() {
+  return <header className='header'>Header</header>;
 }
 export default Header;

@@ -1,9 +1,7 @@
-
-
 function Nav() {
   return (
-    <nav>
-        <img src="./icons_assets/Logo.svg" alt="Little Lemon logo"/>
+    <nav className='navigation'>
+      <img src='./icons_assets/Logo.svg' alt='Little Lemon logo' />
       <ul>
         <li>
           <a href='' alt='Home'>

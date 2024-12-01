@@ -1,7 +1,4 @@
-function Main()
-{
-    return(
-        <main>Main</main>
-    )
+function Main() {
+  return <main className='main'>Main</main>;
 }
 export default Main;
