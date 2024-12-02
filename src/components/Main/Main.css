@@ -1,0 +1,11 @@
+.heroSection {
+    background-color: #495E57;
+}
+
+.heroSection h2 {
+  color: #f4ce14;
+}
+
+.heroSection h3, p{
+    color: #ffffff;
+}
