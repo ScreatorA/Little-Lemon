@@ -19,6 +19,20 @@ HIGHLIGHT COLORS
   padding: 0;
 }
 
+@font-face {
+  font-family: "Karla";
+  src: url("fonts/Karla-VariableFont_wght.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Markazi Text";
+  src: url("fonts/MarkaziText-VariableFont_wght.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
 /*HEADER*/
 .header {
   grid-column: 3 / 11;
@@ -28,6 +42,11 @@ HIGHLIGHT COLORS
   align-items: center;
   background-color: #ee9972;
   border-radius: 12px;
+  font-family: "Karla";
+  font-size: 18px;
+  font-weight: bold;
+  width: 100%;
+  height: auto;
 }
 
 .header img {
@@ -123,10 +142,21 @@ HIGHLIGHT COLORS
   }
 }
 
-@media (max-width: 480px) { /* Smartphones */ }
-@media (max-width: 600px) { /* Small tablets */ }
-@media (max-width: 768px) { /* Tablets and small laptops */ }
-@media (max-width: 1024px) { /* Laptops and desktops */ }
-@media (max-width: 1200px) { /* Wide screens */ }
-@media (min-width: 1201px) { /* Ultra-wide screens */ }
-
+@media (max-width: 480px) {
+  /* Smartphones */
+}
+@media (max-width: 600px) {
+  /* Small tablets */
+}
+@media (max-width: 768px) {
+  /* Tablets and small laptops */
+}
+@media (max-width: 1024px) {
+  /* Laptops and desktops */
+}
+@media (max-width: 1200px) {
+  /* Wide screens */
+}
+@media (min-width: 1201px) {
+  /* Ultra-wide screens */
+}

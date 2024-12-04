@@ -10,6 +10,11 @@ export default function About() {
         clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit
         amet.
       </p>
+      <img src='./icons_assets/restaurant.jpg' alt='Restaurant'></img>
+      <img
+        src='./icons_assets/Mario and Adrian b.jpg'
+        alt='Adrian and Mario'
+      ></img>
     </section>
   );
 }

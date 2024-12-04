@@ -2,9 +2,10 @@
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   /* grid-template-rows: 50px 550px 900px 500px 650px 200px; */
-  grid-template-rows: 1fr 2fr 4fr 2fr 3fr 2fr;
+  grid-template-rows: 0.25fr 1.5fr 3fr 2fr 2fr 0.75fr;
   margin: 80px;
   margin-top: 0;
   margin-bottom: 0;
   column-gap: 20px;
+  background-color: #fbdab6;
 }
