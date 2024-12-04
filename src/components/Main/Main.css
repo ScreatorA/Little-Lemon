@@ -61,28 +61,51 @@ p {
 
 .highlights {
   background-color: #d9d9d9;
-  margin: 0;
+  max-width: 100%;
+  max-height: 100%;
+  padding: 0 0 5rem 0;
 }
 
 .highlights .textContent {
-  margin: 0 0 0 1rem;
   display: flex;
   flex-direction: row;
+  align-items: baseline;
+  padding: 5rem 0 0 5rem;
 }
 
-.highlights .highlightCards {
-  margin: 0 0 0 1rem;
+.highlights button {
+  align-self: flex-end;
+}
+
+.highlightCards {
   display: flex;
   flex-direction: row;
+  justify-self: center;
+  margin: 5rem 10rem 0 10rem;
+}
+
+.greekSaladCard,
+.bruschettaCard,
+.lemonDessertCard {
+  background-color: #edefee;
+  padding: 0 0 5rem 0;
+  margin: 1rem;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  width: 100%;
 }
 
-.highlights,
-.testimonials,
-.about,
-p {
-  color: black;
+.highlightCardImage {
+  width: auto;
+  height: auto;
+}
+
+#greekSalad,
+#bruschetta,
+#lemonDessert {
+  width: 20rem;
+  height: 15rem;
 }
 
 /* TESTIMONIALS */
@@ -117,4 +140,11 @@ button {
   font-size: 18px;
   font-weight: 600;
   align-self: flex-start;
+}
+
+.highlights,
+.testimonials,
+.about,
+p {
+  color: black;
 }
