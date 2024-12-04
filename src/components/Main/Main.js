@@ -4,7 +4,7 @@ import Highlights from "./Highlights";
 import Testimonials from "./Testimonials";
 import About from "./About";
 
-function Main() {
+export default function Main() {
   return (
     <main className='main'>
       <Hero />
@@ -14,4 +14,3 @@ function Main() {
     </main>
   );
 }
-export default Main;

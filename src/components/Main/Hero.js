@@ -1,4 +1,4 @@
-function Hero() {
+export default function Hero() {
   return (
     <section className='heroSection'>
       <h2>Little Lemon</h2>
@@ -8,8 +8,8 @@ function Hero() {
         eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
         voluptua.
       </p>
+      <button>Online Menu</button>
+      <img src='' alt='Bruscheta Serving from Chef'></img>
     </section>
   );
 }
-
-export default Hero;
