@@ -9,7 +9,7 @@ export default function Hero() {
           nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
           sed diam voluptua.
         </p>
-        <button>Reserve a table</button>
+        <button className="buttonReservation">Reserve a table</button>
       </div>
       <aside>
         <img
