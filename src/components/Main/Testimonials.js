@@ -1,29 +1,50 @@
+import Rating from "./Rating";
+import { FourStarRating } from "./Rating";
+import { ThreeStarRating } from "./Rating";
+import ProfileInformation from "./ProfileInformation";
+
 export default function Testimonials() {
   return (
     <section className='testimonials'>
       <article>
-        <p>Rating</p>
-        <img src='./images/Alisha.jpg' alt='Alishas Review'></img>
-        <p>Alisha</p>
-        <p>Review</p>
+        <div className='profile'>
+          <Rating />
+          <ProfileInformation
+            person={{ name: "Alisha" }}
+            imageSource={"./images/Alisha.jpg"}
+            review={"Review"}
+          />
+        </div>
       </article>
       <article>
-        <p>Rating</p>
-        <img src='./images/Lorenz.jpg' alt='Lorenzs Review'></img>
-        <p>Lorenz</p>
-        <p>Review</p>
+        <div className='profile'>
+          <FourStarRating />
+          <ProfileInformation
+            person={{ name: "Lorenz" }}
+            imageSource={"./images/Lorenz.jpg"}
+            review={"Review"}
+          />
+        </div>
       </article>
       <article>
-        <p>Rating</p>
-        <img src='./images/Tanya.jpg' alt='Tanya Review'></img>
-        <p>Tanya</p>
-        <p>Review</p>
+        <div className='profile'>
+          <ThreeStarRating />
+          <ProfileInformation
+            person={{ name: "Tanya" }}
+            imageSource={"./images/Tanya.jpg"}
+            review={"Review"}
+          />
+        </div>
       </article>
       <article>
-        <p>Rating</p>
-        <img src='./images/Chris.jpg' alt='Chris Review'></img>
-        <p>Chris</p>
-        <p>Review</p>
+        <div className='profile'>
+          <Rating />
+          <ProfileInformation
+            person={{ name: "Chris" }}
+            imageSource={"./images/Chris.jpg"}
+            review={"Review"}
+          />
+        </div>
       </article>
     </section>
   );

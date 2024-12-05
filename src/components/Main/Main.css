@@ -186,6 +186,10 @@ p {
   height: auto;
 }
 
+#rating {
+  width: 1.5rem;
+  height: 1.5rem;
+}
 /* ABOUT */
 .about {
   background-color: #d9d9d9;
