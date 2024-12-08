@@ -18,7 +18,7 @@
   }
 }
 
-@media (max-width: 1178px) {
+@media (min-width: 601px) and (max-width: 1178px) {
   /* Small tablets */
   #root {
     grid-template-columns: repeat(6, 1fr);

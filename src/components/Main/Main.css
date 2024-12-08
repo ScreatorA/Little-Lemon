@@ -119,11 +119,6 @@ p {
   flex-wrap: wrap;
 }
 
-.highlightCardImage {
-  width: auto;
-  height: auto;
-}
-
 #greekSalad,
 #bruschetta,
 #lemonDessert {
@@ -297,6 +292,8 @@ h3 {
 
 .aboutText > p {
   font-family: "Markazi text";
+  font-size: 18px;
+  font-weight: 500;
 }
 
 .aboutImage {
@@ -397,10 +394,33 @@ p {
   }
 
   .highlightCards {
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
+    flex-direction: column;
     padding-bottom: 2rem;
     margin-top: 2rem;
   }
+
+  .bruschettaCard,
+  .greekSaladCard,
+  .lemonDessertCard {
+    flex-direction: row;
+    max-width: 100%;
+  }
+
+  .cardImage {
+    max-width: 50%;
+  }
+
+  .menuInformation {
+    max-width: 50%;
+  }
+
+  #greekSalad,
+  #bruschetta,
+  #lemonDessert {
+    height: 100%;
+  }
+
   .aboutText,
   .aboutImage {
     max-width: 50%;
@@ -413,7 +433,7 @@ p {
   }
 }
 
-@media (max-width: 1178px) {
+@media (min-width: 1025px) and (max-width: 1178px) {
   .highlights {
     padding: 0;
   }
