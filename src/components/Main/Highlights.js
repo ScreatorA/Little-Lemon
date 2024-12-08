@@ -7,13 +7,11 @@ export default function Highlights() {
       </div>
       <div className='highlightCards'>
         <article className='article greekSaladCard'>
-          <div className='highlightCardImage'>
-            <img
-              src='./images/Greek salad.jpg'
-              alt='Greek salad'
-              id='greekSalad'
-            ></img>
-          </div>
+          <img
+            src='./images/Greek salad.jpg'
+            alt='Greek salad'
+            id='greekSalad'
+          ></img>
           <div className='menuInformation'>
             <div className='menu'>
               <p className='menuName'>Greek Salad</p>

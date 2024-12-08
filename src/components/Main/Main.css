@@ -1,29 +1,35 @@
 /* BUTTON */
 button {
   background-color: #f4ce14;
-  width: 200px;
-  height: 70px;
+  width: 12rem;
+  height: 4rem;
   border-radius: 12px;
   font-family: "Karla";
   font-size: 18px;
   font-weight: 600;
 }
 
+.buttonReservation {
+  margin: auto 0 1rem 1rem;
+  align-self: flex-start;
+}
+.buttonMenu {
+  margin-left: auto;
+  margin-right: 5rem;
+}
+
 /* HERO SECTION */
 .heroSection {
   background-color: #495e57;
   display: flex;
+  flex-wrap: wrap;
 }
 
 .heroSection .textContent {
   display: flex;
   flex-direction: column; /* Align the text in a column */
   max-width: 50%; /* Limits the width of the text section */
-}
-
-.buttonReservation {
-  margin: auto 0 1rem 1rem;
-  align-self: flex-start;
+  flex-wrap: wrap;
 }
 
 .heroSection h2,
@@ -60,6 +66,7 @@ p {
   flex: 1;
   display: flex;
   justify-content: flex-end;
+  flex-wrap: wrap;
 }
 
 .heroSection #restaurantFood {
@@ -84,17 +91,13 @@ p {
   align-items: center;
   justify-content: center;
   padding: 5rem 0 0 5rem;
+  flex-wrap: wrap;
 }
 
 .highlights .textContent h2 {
   font-family: "Karla";
   font-size: 64px;
   font-weight: 600;
-}
-
-.buttonMenu {
-  margin-left: auto;
-  margin-right: 5rem;
 }
 
 .highlightCards {
@@ -113,6 +116,7 @@ p {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .highlightCardImage {
@@ -130,7 +134,8 @@ p {
 .menu {
   display: flex;
   flex-direction: row;
-  padding: 1.5rem 0.5rem;
+  padding: 1.5rem 1rem;
+  flex-wrap: wrap;
 }
 
 .menuName {
@@ -158,6 +163,7 @@ p {
   display: flex;
   flex-direction: row;
   padding: 3rem 0 1rem 1rem;
+  flex-wrap: wrap;
 }
 
 .cardOrderInformation p {
@@ -178,26 +184,130 @@ p {
 /* TESTIMONIALS */
 .testimonials {
   background-color: #495e57;
-  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-items: center;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
 }
 
-.testimonials img {
-  width: 8rem;
+.testimonialsHeader {
+  margin: 1rem;
+}
+
+.testimonialsHeader > h2 {
+  color: #ffffff;
+  font-family: "Karla";
+  font-size: 40px;
+  font-weight: 600;
+}
+
+.testimonialsArticle {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  gap: 2rem;
+  padding: 2rem;
+  flex-wrap: wrap;
+}
+
+.testimonials article {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #edefee;
+  border-radius: 12px;
+  width: 15rem;
   height: auto;
+  margin-bottom: auto;
+  flex-wrap: wrap;
+}
+
+.profileInformation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.profileInformation img {
+  width: 15rem;
+  height: 15rem;
+  border-radius: 12px;
+  padding: 0 0 auto 0;
+  margin: 0 0 auto 0;
+}
+
+.personRating {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.personRating p,
+.rating {
+  align-self: center;
+  padding: 0 1rem;
+  margin: 0.5rem 0;
+}
+
+.personRating p {
+  font-family: "Karla";
+  font-size: 16px;
+  font-weight: bold;
 }
 
 #rating {
   width: 1.5rem;
   height: 1.5rem;
 }
+
+.review {
+  padding: 0.25rem 1rem 0.5rem 1rem;
+  align-self: flex-start;
+  font-family: "Karla";
+  font-size: 16px;
+  font-weight: 500;
+}
+
 /* ABOUT */
 .about {
   background-color: #d9d9d9;
-  margin: 0;
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  padding: 2rem;
+  max-width: 100%;
+  flex-wrap: wrap;
+}
+
+.aboutText {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.aboutText > h2,
+h3 {
+  font-family: "Karla";
+  padding-bottom: 1rem;
+}
+
+.aboutText > p {
+  font-family: "Markazi text";
+}
+
+.aboutImage {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  flex-wrap: wrap;
 }
 
 .about img {
-  width: 30rem;
+  width: 20rem;
   height: auto;
 }
 
@@ -206,4 +316,125 @@ p {
 .about,
 p {
   color: black;
+}
+
+@media (max-width: 600px) {
+  /* Small tablets */
+
+  /* HERO SECTION */
+  .heroSection {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  aside img {
+    margin: 0 auto 0 1rem;
+  }
+
+  .buttonReservation {
+    margin-top: 1rem;
+    align-self: center;
+  }
+
+  .heroSection p {
+    margin: 1rem 1rem 0 1.5rem;
+  }
+
+  .heroSection .textContent {
+    max-width: 100%; /* Limits the width of the text section */
+    align-items: center;
+  }
+
+  /* HIGHLIGHTS */
+
+  .highlights .textContent {
+    flex-direction: column;
+    padding: 0;
+  }
+
+  .highlights .textContent h2 {
+    text-align: center;
+    margin: 2rem 0;
+  }
+
+  .buttonMenu {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .highlightCards {
+    flex-direction: column;
+    align-content: center;
+    margin-top: 3rem;
+  }
+
+  /* TESTIMONIALS */
+  .testimonialsArticle {
+    flex-direction: column;
+  }
+  /* ABOUT */
+  .about {
+    flex-direction: column;
+  }
+
+  .aboutText {
+    align-items: center;
+  }
+
+  .aboutImage {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media (max-width: 1024px) {
+  .highlights {
+    padding: 0;
+  }
+
+  .highlights .textContent {
+    padding-top: 2rem;
+  }
+
+  .highlightCards {
+    flex-wrap: nowrap;
+    padding-bottom: 2rem;
+    margin-top: 2rem;
+  }
+  .aboutText,
+  .aboutImage {
+    max-width: 50%;
+  }
+
+  .aboutImage {
+    flex-direction: column;
+    align-content: center;
+    margin: auto;
+  }
+}
+
+@media (max-width: 1178px) {
+  .highlights {
+    padding: 0;
+  }
+
+  .highlights .textContent {
+    padding-top: 2rem;
+  }
+
+  .highlightCards {
+    flex-wrap: nowrap;
+    padding-bottom: 2rem;
+    margin-top: 2rem;
+  }
+  .aboutText,
+  .aboutImage {
+    max-width: 50%;
+  }
+
+  .aboutImage {
+    flex-direction: column;
+    align-content: center;
+    margin: auto;
+  }
 }
