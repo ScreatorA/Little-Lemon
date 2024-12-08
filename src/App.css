@@ -48,6 +48,10 @@ HIGHLIGHT COLORS
   font-weight: bold;
   width: 100%;
   height: auto;
+  position: -webkit-sticky; /*Safari*/
+  position: sticky; /*Modern Webbrowser*/
+  top: 0;
+  z-index: 10;
 }
 
 .header img {

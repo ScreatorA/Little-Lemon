@@ -9,72 +9,11 @@ button {
   font-weight: 600;
 }
 
-.buttonReservation {
-  margin: auto 0 1rem 1rem;
-  align-self: flex-start;
-}
 .buttonMenu {
   margin-left: auto;
   margin-right: 5rem;
 }
 
-/* HERO SECTION */
-.heroSection {
-  background-color: #495e57;
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.heroSection .textContent {
-  display: flex;
-  flex-direction: column; /* Align the text in a column */
-  max-width: 50%; /* Limits the width of the text section */
-  flex-wrap: wrap;
-}
-
-.heroSection h2,
-h3 {
-  font-family: "Markazi Text";
-}
-
-.heroSection h3,
-p {
-  color: #ffffff;
-}
-
-.heroSection h2 {
-  color: #f4ce14;
-  font-size: 64px;
-  font-weight: bold;
-  margin: 1rem 0 0 1.5rem;
-}
-
-.heroSection h3 {
-  font-size: 40px;
-  font-weight: normal;
-  margin: 0 0 0 1.5rem;
-}
-
-.heroSection p {
-  font-family: "Karla";
-  font-size: 18px;
-  font-weight: 500;
-  margin: 1rem 0 0 1.5rem;
-}
-
-.heroSection aside {
-  flex: 1;
-  display: flex;
-  justify-content: flex-end;
-  flex-wrap: wrap;
-}
-
-.heroSection #restaurantFood {
-  width: 100%;
-  max-width: 300px;
-  height: auto;
-  border-radius: 12px;
-}
 
 /* HIGHLIGHTS */
 
@@ -326,15 +265,18 @@ p {
 
   aside img {
     margin: 0 auto 0 1rem;
+    max-width: 100%;
   }
 
   .buttonReservation {
     margin-top: 1rem;
     align-self: center;
+    max-width: 100%;
   }
 
   .heroSection p {
     margin: 1rem 1rem 0 1.5rem;
+    max-width: 100%;
   }
 
   .heroSection .textContent {
@@ -363,6 +305,14 @@ p {
     flex-direction: column;
     align-content: center;
     margin-top: 3rem;
+    max-width: 100%;
+  }
+
+  #greekSalad,
+  #bruschetta,
+  #lemonDessert {
+    height: 100%;
+    max-width: 100%;
   }
 
   /* TESTIMONIALS */
@@ -381,10 +331,11 @@ p {
   .aboutImage {
     flex-direction: column;
     align-items: center;
+    max-width: 100%;
   }
 }
 
-@media (max-width: 1024px) {
+@media (min-width: 962px) and (max-width: 1024px) {
   .highlights {
     padding: 0;
   }
