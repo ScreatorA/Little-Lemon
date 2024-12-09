@@ -1,6 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
+import "./App.css";
+import "./components/Main/Main.css";
+import "./components/Main/About.css";
+import "./components/Main/Hero.css";
+import "./components/Main/Highlights";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";

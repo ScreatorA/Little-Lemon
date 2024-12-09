@@ -1,3 +1,4 @@
+import "./Testimonials.css";
 import Rating from "./Rating";
 import { FourStarRating } from "./Rating";
 import { ThreeStarRating } from "./Rating";

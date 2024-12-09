@@ -1,3 +1,5 @@
+import "./About.css";
+
 export default function About() {
   return (
     <section className='about'>
@@ -12,7 +14,6 @@ export default function About() {
           ipsum dolor sit amet.
         </p>
       </div>
-
       <div className='aboutImage'>
         <img src='./icons_assets/restaurant.jpg' alt='Restaurant'></img>
         <img
