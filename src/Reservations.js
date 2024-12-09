@@ -1,3 +1,9 @@
+import BookingPage from "./components/Main/Booking/BookingPage";
+
 export default function Reservations() {
-  return <div>Reservations</div>;
+  return (
+    <>
+      <BookingPage />
+    </>
+  );
 }
