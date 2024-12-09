@@ -1,52 +1,52 @@
 function Footer() {
+  const doorMatNavigation = [
+    { to: "/", label: "Home" },
+    { to: "/about", label: "About" },
+    { to: "/menu", label: "Menu" },
+    { to: "/reservations", label: "Reservations" },
+    { to: "/orderOnline", label: "Order Online" },
+    { to: "/login", label: "Login" },
+  ];
+
+  const contact = [
+    { href: "#adress", label: "Adress" },
+    { href: "#phoneNumber", label: "Phone Number" },
+    { href: "#email", label: "Email" },
+  ];
+
+  const socialMediaLinks = [
+    { href: "#adress", label: "Adress" },
+    { href: "#phoneNumber", label: "Phone Number" },
+    { href: "#email", label: "Email" },
+  ];
+
   return (
     <footer className='footer'>
       <ul className='doormatNavigation'>
         <p>Doormat Navigation</p>
-        <li>
-          <a href='#home'>Home</a>
-        </li>
-        <li>
-          <a href='#about'>About</a>
-        </li>
-        <li>
-          <a href='#menu'>Menu</a>
-        </li>
-        <li>
-          <a href='#reservations'>Reservations</a>
-        </li>
-        <li>
-          <a href='#orderOnline'>Order Online</a>
-        </li>
-        <li>
-          <a href='#login'>Login</a>
-        </li>
+        {doorMatNavigation.map((footerLink) => (
+          <li key={footerLink.to}>
+            <a href={footerLink.to}>{footerLink.label}</a>
+          </li>
+        ))}
       </ul>
 
       <ul className='contact'>
         <p>Contact</p>
-        <li>
-          <a href='#adress'>Adress</a>
-        </li>
-        <li>
-          <a href='#phoneNumber'>Phone Number</a>
-        </li>
-        <li>
-          <a href='#email'>Email</a>
-        </li>
+        {contact.map((contactLink) => (
+          <li key={contactLink.href}>
+            <a href={contactLink.href}>{contactLink.label}</a>
+          </li>
+        ))}
       </ul>
 
       <ul className='socialMediaLinks'>
         <p>Social Media Links</p>
-        <li>
-          <a href='#adress'>Adress</a>
-        </li>
-        <li>
-          <a href='#phoneNumber'>Phone Number</a>
-        </li>
-        <li>
-          <a href='#email'>Email</a>
-        </li>
+        {socialMediaLinks.map((socialMediaLink) => (
+          <li key={socialMediaLink.href}>
+            <a href={socialMediaLink.href}>{socialMediaLink.label}</a>
+          </li>
+        ))}
       </ul>
     </footer>
   );

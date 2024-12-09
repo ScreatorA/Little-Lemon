@@ -7,7 +7,7 @@ import "./components/Main/Testimonials.css";
 import Header from "./components/Header";
 import Main from "./components/Main/Main";
 import Footer from "./components/Footer";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import About from "./components/Main/About";
 import Highlights from "./components/Main/Highlights";
 import Reservations from "./Reservations";
@@ -15,8 +15,23 @@ import OrderOnline from "./OrderOnline";
 import Login from "./Login";
 
 function App() {
+  const location = useLocation(); // Aktuellen Pfad abfragen
+
+  //Dynamische Klassen basierend auf Route
+  // ABOUT
+  const routeClasses = {
+    "/about": "root-about",
+    "/menu": "root-menu",
+    "/reservations": "root-reservations",
+    "/orderOnline": "root-orderOnline",
+    "/login": "root-login",
+    "/": "root-default",
+  };
+
+  const rootClass = routeClasses[location.pathname] || "root-default";
+
   return (
-    <>
+    <div id='root' className={rootClass}>
       <Header />
       <div className='main'>
         <Routes>
@@ -29,7 +44,7 @@ function App() {
         </Routes>
       </div>
       <Footer />
-    </>
+    </div>
   );
 }
 

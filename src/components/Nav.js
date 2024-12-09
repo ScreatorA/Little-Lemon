@@ -1,27 +1,23 @@
 import { Link } from "react-router-dom";
 
 function Nav() {
+  const navLinks = [
+    { to: "/", label: "Home" },
+    { to: "/about", label: "About" },
+    { to: "/menu", label: "Menu" },
+    { to: "/reservations", label: "Reservations" },
+    { to: "/orderOnline", label: "Order Online" },
+    { to: "/login", label: "Login" },
+  ];
+
   return (
     <nav className='navigation'>
       <ul className='nav-menu'>
-        <li>
-          <Link to='/'>Home</Link>
-        </li>
-        <li>
-          <Link to='/about'>About</Link>
-        </li>
-        <li>
-          <Link to='/menu'>Menu</Link>
-        </li>
-        <li>
-          <Link to='/reservations'>Reservations</Link>
-        </li>
-        <li>
-          <Link to='/orderOnline'>Order Online</Link>
-        </li>
-        <li>
-          <Link to='/login'>Login</Link>
-        </li>
+        {navLinks.map((link) => (
+          <li>
+            <Link to={link.to}>{link.label}</Link>
+          </li>
+        ))}
       </ul>
     </nav>
   );
