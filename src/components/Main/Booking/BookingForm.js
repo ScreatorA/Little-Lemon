@@ -1,4 +1,7 @@
+import "./BookingForm.css";
 import { useState, useRef } from "react";
+import { Formik } from "formik";
+
 
 export default function BookingForm() {
   const [form, setForm] = useState({
@@ -46,7 +49,8 @@ export default function BookingForm() {
   ];
 
   return (
-    <>
+    <div>
+      <h1>Make a Reservation</h1>
       <form style={{ display: "grid", maxWidth: "200px", gap: "20px" }}>
         {/* Form First Name */}
         <div>
@@ -58,6 +62,7 @@ export default function BookingForm() {
             ref={(el) => (formRefs.current["firstName"] = el)}
             value={form.firstName}
             onChange={(e) => setForm({ ...form, firstName: e.target.value })}
+            autoFocus
           />
           <button
             type='button'
@@ -150,6 +155,6 @@ export default function BookingForm() {
 
         <input type='submit' value='Make Your reservation' />
       </form>
-    </>
+    </div>
   );
 }
