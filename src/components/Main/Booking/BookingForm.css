@@ -1,22 +1,50 @@
-.focusButton {
-  width: 10rem;
-  height: 2rem;
-  font-size: 12px;
-}
-
-.formReservation {
+.form {
   display: flex;
   flex-direction: column;
   align-items: center;
+  max-width: 100%;
+  background-color: #f4ce14;
 }
 
-.formik {
-  display: row;
+span {
+  color: red;
+}
+
+.formHeading {
+  font-family: "Karla";
+  font-size: 40px;
+  font-weight: 600;
+  padding-top: 2rem;
+}
+
+.formContent {
+  border-radius: 12px;
+  border-style: solid;
+  background-color: #495e57;
+  margin: 2rem 1rem;
+  padding: 2rem 2rem 2rem 2rem;
+  display: flex;
   flex-direction: column;
 }
 
-.form {
-  display: row;
+.divField {
+  display: flex;
   flex-direction: column;
-  align-items: center;
+  padding-bottom: 1rem;
+}
+
+.formLabel {
+  padding-right: 5rem;
+  color: white;
+}
+
+.field {
+  width: 20rem;
+  border-radius: 4px;
+}
+
+.reservationSubmit {
+  background-color: #f4ce14;
+  margin-top: 2rem;
+  align-self: center;
 }

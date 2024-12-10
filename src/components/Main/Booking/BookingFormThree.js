@@ -1,19 +1,21 @@
 //Using normal ChakraUI and Formik and Yup for form Validation
+import "./BookingForm.css";
+import { useState } from "react";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
-import { Box, Flex } from "@chakra-ui/react";
-export default function BookingForm() {
-  //   const [form, setForm] = useState({
-  //     firstName: "",
-  //     lastName: "",
-  //     email: "",
-  //   });
 
-  //   const formRefs = useRef({});
-
-  //   const focusField = (fieldName) => {
-  //     formRefs.current[fieldName]?.focus();
-  //   };
+export default function BookingForm({ formData, handleChange, handleSubmit }) {
+  const formValidationSchema = Yup.object({
+    firstName: Yup.string()
+      .min(2, "Too, short!")
+      .max(50, "Too Long")
+      .required("First Name is required"),
+    lastName: Yup.string()
+      .min(2, "Too, short!")
+      .max(50, "Too Long")
+      .required("Last Name is required"),
+    email: Yup.string().email("Invalid email").required("Email is required"),
+  });
 
   const reservationTime = [
     { time: "16:00", label: "16:00" },
@@ -48,97 +50,143 @@ export default function BookingForm() {
   ];
 
   return (
-    <Flex gap='4'>
-      <Box bg='#F4CE14'>
-        <div>
-          <h1>Make a Reservation</h1>
-          <Formik
-            initialValues={{ firstName: "", lastName: "", email: "" }}
-            className='formik'
-          >
-            <Form className='form'>
-              {/* FIRST NAME */}
-              <div>
-                <label htmlFor='firstName'>*First Name: </label>
-                <Field
-                  type='text'
-                  id='firstName'
-                  name='firstName'
-                  placeholder='Zoro'
-                ></Field>
-              </div>
+    <Formik
+      className='formik'
+      onSubmit={handleSubmit}
+      validationSchema={formValidationSchema}
+    >
+      <div className='form'>
+        <h1 className='formHeading'>Reservation</h1>
+        <Form className='formContent'>
+          {/* FIRST NAME */}
+          <div className='firstName divField'>
+            <label htmlFor='firstName' className='formLabel'>
+              <span>*</span>First Name:{" "}
+            </label>
+            <Field
+              type='text'
+              id='firstName'
+              name='firstName'
+              value={formData.firstName}
+              onChange={handleChange}
+              placeholder='  Zoro'
+              className='field'
+            ></Field>
+          </div>
 
-              {/* LAST NAME */}
-              <div>
-                <label htmlFor='lastName'>Last Name: </label>
-                <Field
-                  type='text'
-                  id='lastName'
-                  name='lastName'
-                  placeholder='Roronoa'
-                ></Field>
-              </div>
+          {/* LAST NAME */}
+          <div className='lastName divField'>
+            <label htmlFor='lastName' className='formLabel'>
+              <span>*</span>Last Name:{" "}
+            </label>
+            <Field
+              type='text'
+              id='lastName'
+              name='lastName'
+              value={formData.lastName}
+              onChange={handleChange}
+              placeholder='  Roronoa'
+              className='field'
+            ></Field>
+          </div>
 
-              {/* EMAIL */}
-              <div>
-                <label htmlFor='email'>Email: </label>
-                <Field
-                  type='text'
-                  id='email'
-                  name='email'
-                  placeholder='Zoro.Roronoa@mail.de'
-                ></Field>
-              </div>
+          {/* EMAIL */}
+          <div className='email divField'>
+            <label htmlFor='email' className='formLabel'>
+              <span>*</span>Email:{" "}
+            </label>
+            <Field
+              type='text'
+              id='email'
+              name='email'
+              value={formData.email}
+              onChange={handleChange}
+              placeholder='  Zoro.Roronoa@mail.de'
+              className='field'
+            ></Field>
+          </div>
 
-              {/* RESERVATION DATE */}
-              <div>
-                <label htmlFor='reservationDate'>Choose date: </label>
-                <Field type='date' id='reservationDate' name='date' />
-              </div>
+          {/* RESERVATION DATE */}
+          <div className='reservationDate divField'>
+            <label htmlFor='reservationDate' className='formLabel'>
+              <span>*</span>Choose date:{" "}
+            </label>
+            <Field
+              type='date'
+              id='reservationDate'
+              name='date'
+              value={formData.date}
+              onChange={handleChange}
+              className='field'
+            />
+          </div>
 
-              {/* RESERVATION TIME */}
-              <div>
-                <label htmlFor='reservationTime'>Choose time: </label>
-                <Field as='select' name='reservationTime'>
-                  {reservationTime.map((time) => (
-                    <option key={time.time} value={time.time}>
-                      {time.label}
-                    </option>
-                  ))}
-                </Field>
-              </div>
+          {/* RESERVATION TIME */}
+          <div className='reservationTime divField'>
+            <label htmlFor='reservationTime' className='formLabel'>
+              <span>*</span>Choose time:{" "}
+            </label>
+            <Field
+              as='select'
+              id='reservationTime'
+              name='reservationTime'
+              value={formData.time}
+              onChange={handleChange}
+              className='field'
+            >
+              {reservationTime.map((time) => (
+                <option key={time.time} value={time.time}>
+                  {time.label}
+                </option>
+              ))}
+            </Field>
+          </div>
 
-              {/* SELECT NUMBER OF GUESTS*/}
-              <div>
-                <label htmlFor='guests'>Number of guests: </label>
-                <Field
-                  type='number'
-                  name='guests'
-                  placeholder='1'
-                  min='1'
-                  max='10'
-                  id='guests'
-                ></Field>
-              </div>
+          {/* SELECT NUMBER OF GUESTS*/}
+          <div className='guests divField'>
+            <label htmlFor='guests' className='formLabel'>
+              <span>*</span>Number of guests:{" "}
+            </label>
+            <Field
+              type='number'
+              name='guests'
+              value={formData.guests}
+              onChange={handleChange}
+              placeholder='  1'
+              min='1'
+              max='10'
+              id='guests'
+              className='field'
+            ></Field>
+          </div>
 
-              {/* SELECT OCCASION */}
-              <div>
-                <label htmlFor='occasion'>Occasion: </label>
-                <Field as='select' name='occasion'>
-                  {occasion.map((occasion) => (
-                    <option key={occasion.event} value={occasion.event}>
-                      {occasion.label}
-                    </option>
-                  ))}
-                </Field>
-              </div>
+          {/* SELECT OCCASION */}
+          <div className='occasion divField'>
+            <label htmlFor='occasion' className='formLabel'>
+              <span>*</span>Occasion:{" "}
+            </label>
+            <Field
+              as='select'
+              id='occasion'
+              name='occasion'
+              value={formData}
+              onChange={handleChange}
+              className='field'
+            >
+              {occasion.map((occasion) => (
+                <option key={occasion.event} value={occasion.event}>
+                  {occasion.label}
+                </option>
+              ))}
+            </Field>
+          </div>
 
-              {/* BUTTON */}
-              <button type='submit'>Submit</button>
-            </Form>
-          </Formik>
-        </div>
-      </Box>
-    </Flex>
+          {/* BUTTON */}
+          <button type='submit' className='reservationSubmit'>
+            Submit
+          </button>
+        </Form>
+      </div>
+    </Formik>
   );
 }

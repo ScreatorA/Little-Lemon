@@ -14,7 +14,7 @@ function Nav() {
     <nav className='navigation'>
       <ul className='nav-menu'>
         {navLinks.map((link) => (
-          <li>
+          <li key={link.to}>
             <Link to={link.to}>{link.label}</Link>
           </li>
         ))}

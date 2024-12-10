@@ -1,9 +1,7 @@
 //Using normal CSS and Formik and Yup for form Validation
-
 import "./BookingForm.css";
 // import { useState, useRef } from "react";
 import { Formik, Form, Field } from "formik";
-import * as Yup from "yup";
 
 export default function BookingForm() {
   //   const [form, setForm] = useState({
@@ -17,13 +15,6 @@ export default function BookingForm() {
   //   const focusField = (fieldName) => {
   //     formRefs.current[fieldName]?.focus();
   //   };
-
-  validationSchema: Yup.object({
-    firstName: Yup.string()
-      .required("Required")
-      .min(2, "Too Short!")
-      .max(30, "Too long"),
-  });
   const reservationTime = [
     { time: "16:00", label: "16:00" },
     { time: "16:30", label: "16:30" },
@@ -63,6 +54,7 @@ export default function BookingForm() {
         initialValues={{ firstName: "", lastName: "", email: "" }}
         className='formik'
       >
+        <h1>Reserve a table</h1>
         <Form className='form'>
           {/* FIRST NAME */}
           <div>
@@ -141,7 +133,7 @@ export default function BookingForm() {
           </div>
 
           {/* BUTTON */}
-          <button type='submit'>Submit</button>
+          <button type='submit' className="focusButton">Submit</button>
         </Form>
       </Formik>
     </div>
