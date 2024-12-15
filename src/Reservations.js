@@ -75,22 +75,6 @@ const initializeTimes = () => ({
 export default function Reservations() {
   const [state, dispatch] = useReducer(updateTimes, initializeTimes());
 
-  // useEffect(() => {
-  //   async function fetchData(){
-  //     try {
-  //     const response = await fetch(
-  //       "https://raw.githubusercontent.com/courseraap/capstone/main/api.js"
-  //     );
-  //     if (!response.ok) {
-  //       throw new Error(`HTTP error! status: ${response.status}`);
-  //     }
-  //     const data = await response.json();
-  //     console.log(data);
-  //   } catch (error) {
-  //     console.error("Fetch error: ", error);
-  //   }
-  // }}, []);
-
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -101,36 +85,56 @@ export default function Reservations() {
     guests: 2,
   });
 
-  useEffect(() => {
-    async function fetchAvailableTimes() {
-      try {
-        const availableTimes = await fetchAPI(today);
-        if (!availableTimes.ok) {
-          throw new Error(`HTTP error! status: ${availableTimes.status}`);
-        }
-        console.log(availableTimes);
-        dispatch({ type: "SET_TIMES", payload: availableTimes });
-      } catch (error) {
-        console.error("Fetch error: ", error);
-      }
-    }
-    fetchAvailableTimes();
-  }, []);
+  async function fetchAvailableTimes(date) {
+    console.log("Fetching available times for date:", date);
 
-  const handleSubmit = (e) => {
+    try {
+      const availableTimes = await fetchAPI(new Date(date));
+      console.log("API returned times:", availableTimes);
+
+      dispatch({ type: "SET_TIMES", payload: availableTimes });
+    } catch (error) {
+      console.error("Error fetching available times:", error);
+    }
+  }
+
+  useEffect(() => {
+    // Skip fetching for special dates
+    if (
+      formData.date === christmas ||
+      formData.date === sylvester ||
+      formData.date === newYear
+    ) {
+      return;
+    }
+    fetchAvailableTimes(formData.date); // Fetch available times based on the date
+  }, [formData.date]);
+
+  const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent page reload on form submission
     console.log("Form submitted!");
+    try {
+      const success = await submitAPI(formData);
+      if (success) {
+        console.log("Reservation successful!");
+      } else {
+        console.log("Booking failed.");
+      }
+    } catch (error) {
+      console.error("Submit error: ", error);
+    }
   };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+    setFormData((prevData) => {
+      return { ...prevData, [name]: value };
+    });
 
     if (name === "date") {
+      const dateObj = new Date(value); // Convert to Date object
+
       if (value === christmas) {
         dispatch({
           type: "Christmas",
@@ -143,6 +147,8 @@ export default function Reservations() {
         dispatch({
           type: "New Year",
         });
+      } else if (dateObj.getDate() !== new Date(formData.date).getDate()) {
+        fetchAvailableTimes(dateObj); // Refetch available times for the new date
       } else {
         dispatch({
           type: "SET_TIMES",

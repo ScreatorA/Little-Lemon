@@ -149,7 +149,11 @@ export default function BookingForm({
         </div>
 
         {/* BUTTON */}
-        <button type='submit' className='reservationSubmit'>
+        <button
+          type='submit'
+          onClick={handleSubmit}
+          className='reservationSubmit'
+        >
           Submit
         </button>
       </form>

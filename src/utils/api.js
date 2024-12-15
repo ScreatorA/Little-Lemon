@@ -8,19 +8,31 @@ const seededRandom = function (seed) {
 };
 
 export const fetchAPI = function (date) {
-  let result = [];
-  let random = seededRandom(date.getDate());
+  return new Promise((resolve, reject) => {
+    if (!(date instanceof Date)) {
+      return reject(new Error("Invalid date object"));
+    }
 
-  for (let i = 17; i <= 23; i++) {
-    if (random() < 0.5) {
-      result.push(i + ":00");
+    let result = [];
+    let random = seededRandom(date.getDate()); // Ensure date is a valid Date object
+
+    for (let i = 17; i <= 23; i++) {
+      if (random() < 0.5) {
+        result.push(i + ":00");
+      }
+      if (random() < 0.5) {
+        result.push(i + ":30");
+      }
     }
-    if (random() < 0.5) {
-      result.push(i + ":30");
+
+    if (result.length === 0) {
+      reject(new Error("No available times")); // Reject if no times are found
+    } else {
+      resolve(result); // Resolve with the available times
     }
-  }
-  return result;
+  });
 };
+
 export const submitAPI = function (formData) {
   return true;
 };
