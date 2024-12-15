@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 
-export default function BookingForm({ formData, handleChange, handleSubmit }) {
+export default function BookingForm({ handleSubmit }) {
   const formValidationSchema = Yup.object({
     firstName: Yup.string()
       .min(2, "Too, short!")
@@ -52,6 +52,15 @@ export default function BookingForm({ formData, handleChange, handleSubmit }) {
   return (
     <Formik
       className='formik'
+      initialValues={{
+        firstName: "",
+        lastName: "",
+        email: "",
+        date: "",
+        time: "",
+        guests: "",
+        occasion: "",
+      }}
       onSubmit={handleSubmit}
       validationSchema={formValidationSchema}
     >
@@ -67,8 +76,6 @@ export default function BookingForm({ formData, handleChange, handleSubmit }) {
               type='text'
               id='firstName'
               name='firstName'
-              value={formData.firstName}
-              onChange={handleChange}
               placeholder='  Zoro'
               className='field'
             ></Field>
@@ -83,8 +90,6 @@ export default function BookingForm({ formData, handleChange, handleSubmit }) {
               type='text'
               id='lastName'
               name='lastName'
-              value={formData.lastName}
-              onChange={handleChange}
               placeholder='  Roronoa'
               className='field'
             ></Field>
@@ -99,8 +104,6 @@ export default function BookingForm({ formData, handleChange, handleSubmit }) {
               type='text'
               id='email'
               name='email'
-              value={formData.email}
-              onChange={handleChange}
               placeholder='  Zoro.Roronoa@mail.de'
               className='field'
             ></Field>
@@ -115,8 +118,6 @@ export default function BookingForm({ formData, handleChange, handleSubmit }) {
               type='date'
               id='reservationDate'
               name='date'
-              value={formData.date}
-              onChange={handleChange}
               className='field'
             />
           </div>
@@ -130,8 +131,6 @@ export default function BookingForm({ formData, handleChange, handleSubmit }) {
               as='select'
               id='reservationTime'
               name='reservationTime'
-              value={formData.time}
-              onChange={handleChange}
               className='field'
             >
               {reservationTime.map((time) => (
@@ -150,8 +149,6 @@ export default function BookingForm({ formData, handleChange, handleSubmit }) {
             <Field
               type='number'
               name='guests'
-              value={formData.guests}
-              onChange={handleChange}
               placeholder='  1'
               min='1'
               max='10'
@@ -165,14 +162,7 @@ export default function BookingForm({ formData, handleChange, handleSubmit }) {
             <label htmlFor='occasion' className='formLabel'>
               <span>*</span>Occasion:{" "}
             </label>
-            <Field
-              as='select'
-              id='occasion'
-              name='occasion'
-              value={formData}
-              onChange={handleChange}
-              className='field'
-            >
+            <Field as='select' id='occasion' name='occasion' className='field'>
               {occasion.map((occasion) => (
                 <option key={occasion.event} value={occasion.event}>
                   {occasion.label}
