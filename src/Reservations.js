@@ -1,6 +1,7 @@
-import BookingFormTwo from "./components/Main/Booking/BookingFormTwo";
+import BookingFormTwo from "./components/Main/Booking/BookingForm";
 import { useState, useReducer, useEffect } from "react";
 import { fetchAPI, submitAPI } from "./utils/api";
+import { useNavigate } from "react-router-dom";
 
 const today = new Date().toISOString().split("T")[0]; // Date of today
 
@@ -81,9 +82,11 @@ export default function Reservations() {
     email: "",
     date: today,
     time: "17:00",
-    occasion: "date",
+    occasion: "Select a occasion",
     guests: 2,
   });
+
+  const navigate = useNavigate();
 
   async function fetchAvailableTimes(date) {
     console.log("Fetching available times for date:", date);
@@ -117,6 +120,8 @@ export default function Reservations() {
       const success = await submitAPI(formData);
       if (success) {
         console.log("Reservation successful!");
+
+        navigate("/confirmBooking");
       } else {
         console.log("Booking failed.");
       }

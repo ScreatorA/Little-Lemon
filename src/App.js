@@ -13,6 +13,7 @@ import Highlights from "./components/Main/Highlights";
 import Reservations from "./Reservations";
 import OrderOnline from "./OrderOnline";
 import Login from "./Login";
+import ConfirmBooking from "./components/Main/Booking/ConfirmBooking";
 
 function App() {
   const location = useLocation(); // Aktuellen Pfad abfragen
@@ -22,6 +23,7 @@ function App() {
   const routeClasses = {
     "/about": "root-about",
     "/menu": "root-menu",
+    confirmBooking: "root-confirmBooking",
     "/reservations": "root-reservations",
     "/orderOnline": "root-orderOnline",
     "/login": "root-login",
@@ -39,6 +41,7 @@ function App() {
           <Route path='/about' element={<About />} />
           <Route path='/menu' element={<Highlights />} />
           <Route path='/reservations' element={<Reservations />} />
+          <Route path='/confirmBooking' element={<ConfirmBooking />} />
           <Route path='/orderOnline' element={<OrderOnline />} />
           <Route path='/login' element={<Login />} />
         </Routes>

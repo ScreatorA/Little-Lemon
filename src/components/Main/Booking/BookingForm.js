@@ -1,40 +1,16 @@
+//Formik and Yup for form Validation
 import "./BookingForm.css";
-import { useState, useRef } from "react";
-import { Formik } from "formik";
+import { Formik, Field, Form, ErrorMessage } from "formik";
+import * as Yup from "yup";
 
-
-export default function BookingForm() {
-  const [form, setForm] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-  });
-
-  const formRefs = useRef({});
-
-  const focusField = (fieldName) => {
-    formRefs.current[fieldName]?.focus();
-  };
-
-  const reservationTime = [
-    { time: "16:00", label: "16:00" },
-    { time: "16:30", label: "16:30" },
-    { time: "17:00", label: "17:00" },
-    { time: "17:30", label: "17:30" },
-    { time: "18:00", label: "18:00" },
-    { time: "18:30", label: "18:30" },
-    { time: "19:00", label: "19:00" },
-    { time: "19:30", label: "19:30" },
-    { time: "20:00", label: "20:00" },
-    { time: "20:30", label: "20:30" },
-    { time: "21:00", label: "21:00" },
-    { time: "21:30", label: "21:30" },
-    { time: "22:00", label: "22:00" },
-    { time: "22:30", label: "22:30" },
-    { time: "23:00", label: "23:00" },
-  ];
-
+export default function BookingForm({
+  formData,
+  handleChange,
+  handleSubmit,
+  reservationTimes,
+}) {
   const occasion = [
+    { event: "", label: "Select an occasion" },
     { event: "justLoveFood", label: "Foodie/s" },
     { event: "birthday", label: "Birthday" },
     { event: "date", label: "Date" },
@@ -48,113 +24,206 @@ export default function BookingForm() {
     { event: "reunion", label: "Reunion" },
   ];
 
+  const formValidationSchema = Yup.object({
+    firstName: Yup.string()
+      .required("First Name is Required!")
+      .min(2, "Too short!")
+      .max(30, "Too long!"),
+
+    lastName: Yup.string()
+      .required("Last Name is Required!")
+      .min(2, "Too short!")
+      .max(30, "Too short!"),
+
+    email: Yup.string()
+      .email("Invalid email format")
+      .required("Email is Required!")
+      .min(5, "Email muste be at least 5 characters!"),
+
+    date: Yup.date()
+      .required("Date is Required!")
+      .test(
+        "future Date or present-Date",
+        "Date needs to be a future Date or past Date",
+        (value) =>
+          value &&
+          new Date(value).setHours(0, 0, 0, 0) >=
+            new Date().setHours(0, 0, 0, 0)
+      ),
+    time: Yup.date().required("Time is required!"),
+    // .test(
+    //   "Time needs to be ", )
+    occasion: Yup.string()
+      .required("Occasion needs to be selected")
+      .test(
+        "Occassion is selected",
+        "",
+        (value) => value && value !== "Select an occasion"
+      ),
+  });
+
   return (
     <div>
-      <h1>Make a Reservation</h1>
-      <form style={{ display: "grid", maxWidth: "200px", gap: "20px" }}>
-        {/* Form First Name */}
-        <div>
-          <label htmlFor='firstName'>First Name</label>
-          <input
-            type='text'
-            id='firstName'
-            name='firstName'
-            ref={(el) => (formRefs.current["firstName"] = el)}
-            value={form.firstName}
-            onChange={(e) => setForm({ ...form, firstName: e.target.value })}
-            autoFocus
-          />
-          <button
-            type='button'
-            onClick={() => focusField("firstName")}
-            className='focusButton'
-          >
-            Focus on First Name
-          </button>
-        </div>
+      <h1 className='formHeading'>Make a Reservation</h1>
+      <Formik
+        initialValues={{
+          firstName: "",
+          lastName: "",
+          email: "",
+          date: "",
+          time: "",
+          occasion: "",
+          guests: "",
+        }}
+        validationSchema={formValidationSchema}
+        onSubmit={handleSubmit}
+        className='form'
+      >
+        {({ errors, touched, values }) => (
+          <Form className='formContent'>
+            {/* FIRST NAME */}
+            <div className='firstName divField'>
+              <label htmlFor='firstName' className='formLabel'>
+                First Name<span>*</span>
+              </label>
+              <Field
+                type='text'
+                id='firstName'
+                name='firstName'
+                value={formData.firstName}
+                onChange={handleChange}
+                placeholder='  Zoro'
+                className='field'
+              />
+              {/* Show error message if validation fails */}
+              {errors.firstName && touched.firstName ? (
+                <div className='error'>{errors.firstName}</div>
+              ) : null}
+              <ErrorMessage name='firstName' />
+            </div>
 
-        {/* Form Last Name */}
-        <div>
-          <label htmlFor='lastName'>Last Name</label>
-          <input
-            type='text'
-            id='lastName'
-            name='lastName'
-            ref={(el) => (formRefs.current["lastName"] = el)}
-            value={form.lastName}
-            onChange={(e) => setForm({ ...form, lastName: e.target.value })}
-          />
-          <button
-            type='button'
-            onClick={() => focusField("lastName")}
-            className='focusButton'
-          >
-            Focus on Last Name
-          </button>
-        </div>
+            {/* LAST NAME */}
+            <div className='lastName divField'>
+              <label htmlFor='lastName' className='formLabel'>
+                Last Name<span>*</span>
+              </label>
+              <Field
+                type='text'
+                id='lastName'
+                name='lastName'
+                value={formData.lastName}
+                onChange={handleChange}
+                placeholder='  Roronoa'
+                className='field'
+                minLength={2}
+                maxLength={50}
+                required
+              />
+            </div>
 
-        {/* Form Email */}
-        <div>
-          <label htmlFor='email'>Email</label>
-          <input
-            type='email'
-            id='email'
-            name='email'
-            ref={(el) => (formRefs.current["email"] = el)}
-            value={form.email}
-            onChange={(e) => setForm({ ...form, email: e.target.value })}
-          />
-          <button
-            type='button'
-            onClick={() => focusField("email")}
-            className='focusButton'
-          >
-            Focus on Email
-          </button>
-        </div>
+            {/* EMAIL */}
+            <div className='email divField'>
+              <label htmlFor='email' className='formLabel'>
+                Email<span>*</span>
+              </label>
+              <Field
+                type='email'
+                id='email'
+                name='email'
+                value={formData.email}
+                onChange={handleChange}
+                placeholder='  Zoro.Roronoa@mail.de'
+                className='field'
+                minLength={5}
+                required
+              />
+            </div>
 
-        {/* Form Reservation Date */}
-        <label htmlFor='reservationDate'>Choose date</label>
-        <input
-          type='date'
-          id='reservationDate'
-          name='date'
-          ref={(el) => (formRefs.current["date"] = el)}
-          value={form.date}
-        />
-        <button
-          type='button'
-          onClick={() => focusField("date")}
-          className='focusButton'
-        >
-          Focus on Date
-        </button>
-        {/* Form Reservation Time */}
-        <label htmlFor='reservationTime'>Choose time</label>
-        <select id='reservationTime'>
-          {reservationTime.map((time) => (
-            <option key={time.time} value={time.time}>
-              {time.label}
-            </option>
-          ))}
-        </select>
+            {/* RESERVATION DATE */}
+            <div className='reservationDate divField'>
+              <label htmlFor='date' className='formLabel'>
+                Choose date<span>*</span>
+              </label>
+              <Field
+                type='date'
+                id='date'
+                name='date'
+                className='field'
+                value={formData.date}
+                onChange={handleChange}
+                required
+              />
+            </div>
 
-        {/* Form Number of Guests */}
-        <label htmlFor='guests'>Number of guests</label>
-        <input type='number' placeholder='1' min='1' max='10' id='guests' />
+            {/* RESERVATION TIME */}
+            <div className='availableTimes divField'>
+              <label htmlFor='time' className='formLabel'>
+                Choose time<span>*</span>
+              </label>
+              <Field
+                as='select'
+                id='time'
+                name='time'
+                className='field'
+                value={formData.time}
+                onChange={handleChange}
+                required
+              >
+                {reservationTimes.time.map((time) => (
+                  <option key={time} value={time}>
+                    {time}
+                  </option>
+                ))}
+              </Field>
+            </div>
 
-        {/* Form Selecet Occasion */}
-        <label htmlFor='occasion'>Occasion</label>
-        <select id='occasion'>
-          {occasion.map((occasion) => (
-            <option key={occasion.event} value={occasion.event}>
-              {occasion.label}
-            </option>
-          ))}
-        </select>
+            {/* SELECT OCCASION */}
+            <div className='occasion divField'>
+              <label htmlFor='occasion' className='formLabel'>
+                Occasion<span>*</span>
+              </label>
+              <Field
+                as='select'
+                id='occasion'
+                name='occasion'
+                className='field'
+                value={formData.occasion}
+                onChange={handleChange}
+              >
+                {occasion.map((occasion) => (
+                  <option key={occasion.event} value={occasion.event}>
+                    {occasion.label}
+                  </option>
+                ))}
+              </Field>
+            </div>
 
-        <input type='submit' value='Make Your reservation' />
-      </form>
+            {/* SELECT NUMBER OF GUESTS*/}
+            <div className='guests divField'>
+              <label htmlFor='guests' className='formLabel'>
+                Number of guests<span>*</span>
+              </label>
+              <Field
+                type='number'
+                name='guests'
+                placeholder='  1'
+                min='2'
+                max='10'
+                id='guests'
+                className='field'
+                value={formData.guests}
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+            {/* BUTTON */}
+            <button type='submit' className='reservationSubmit'>
+              Submit
+            </button>
+          </Form>
+        )}
+      </Formik>
     </div>
   );
 }
