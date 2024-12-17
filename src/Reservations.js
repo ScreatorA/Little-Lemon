@@ -30,7 +30,7 @@ export function updateTimes(state, action) {
         time: ["17:00", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00"],
       };
     }
-    case "New Year": {
+    case "NewYear": {
       return {
         ...state,
         time: [
@@ -81,8 +81,8 @@ export default function Reservations() {
     lastName: "",
     email: "",
     date: today,
-    time: "17:00",
-    occasion: "Select a occasion",
+    time: "16:00",
+    occasion: "default",
     guests: 2,
   });
 
@@ -114,7 +114,7 @@ export default function Reservations() {
   }, [formData.date]);
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Prevent page reload on form submission
+    //e.preventDefault(); // Prevent page reload on form submission
     console.log("Form submitted!");
     try {
       const success = await submitAPI(formData);
@@ -150,7 +150,7 @@ export default function Reservations() {
         });
       } else if (value === newYear) {
         dispatch({
-          type: "New Year",
+          type: "NewYear",
         });
       } else if (dateObj.getDate() !== new Date(formData.date).getDate()) {
         fetchAvailableTimes(dateObj); // Refetch available times for the new date

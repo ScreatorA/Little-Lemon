@@ -10,7 +10,7 @@ export default function BookingForm({
   reservationTimes,
 }) {
   const occasion = [
-    { event: "", label: "Select an occasion" },
+    { event: "default", label: "Select an occasion" },
     { event: "justLoveFood", label: "Foodie/s" },
     { event: "birthday", label: "Birthday" },
     { event: "date", label: "Date" },
@@ -27,60 +27,56 @@ export default function BookingForm({
   const formValidationSchema = Yup.object({
     firstName: Yup.string()
       .required("First Name is Required!")
-      .min(2, "Too short!")
-      .max(30, "Too long!"),
+      .min(2, "First Name Should at least have 2 Characters")
+      .max(30, "First Name Should at most have 30 Characters"),
 
     lastName: Yup.string()
       .required("Last Name is Required!")
-      .min(2, "Too short!")
-      .max(30, "Too short!"),
+      .min(2, "Last Name Should at least have 2 Characters")
+      .max(30, "Last Name Should at most have 30 Characters"),
 
     email: Yup.string()
       .email("Invalid email format")
       .required("Email is Required!")
-      .min(5, "Email muste be at least 5 characters!"),
+      .min(5, "Email must have at least 5 characters!"),
 
     date: Yup.date()
       .required("Date is Required!")
       .test(
         "future Date or present-Date",
-        "Date needs to be a future Date or past Date",
+        `The date must either be ${new Date().toLocaleDateString()} or lay in the future  `,
         (value) =>
           value &&
           new Date(value).setHours(0, 0, 0, 0) >=
             new Date().setHours(0, 0, 0, 0)
       ),
-    time: Yup.date().required("Time is required!"),
-    // .test(
-    //   "Time needs to be ", )
+
     occasion: Yup.string()
-      .required("Occasion needs to be selected")
+      .required("Occasion is Required!")
       .test(
         "Occassion is selected",
-        "",
-        (value) => value && value !== "Select an occasion"
+        "Occasion needs to be selected",
+        (value) => value && value !== "default"
       ),
+
+    guests: Yup.number().required("Guests number is Required!"),
+    //It needs further options like: If Occasion is Date Guests minimum must be 2, or just 2. If Occasion is Family Gathering than minimum guests must be 3( Here is the Question what is for Widows with only one Child it is also Family and the number of guests is 2 so it is not really good to do this) So it 2 is ok as I see. For everything except for Foodie it should be set to 2
   });
 
   return (
-    <div>
-      <h1 className='formHeading'>Make a Reservation</h1>
+    <div className='fullForm'>
       <Formik
-        initialValues={{
-          firstName: "",
-          lastName: "",
-          email: "",
-          date: "",
-          time: "",
-          occasion: "",
-          guests: "",
-        }}
+        initialValues={formData}
         validationSchema={formValidationSchema}
-        onSubmit={handleSubmit}
+        onSubmit={(e) => {
+          console.log("Form" + { formValidationSchema });
+          return { handleSubmit };
+        }}
         className='form'
       >
         {({ errors, touched, values }) => (
           <Form className='formContent'>
+            <h1 className='formHeading'>Make a Reservation</h1>
             {/* FIRST NAME */}
             <div className='firstName divField'>
               <label htmlFor='firstName' className='formLabel'>
@@ -90,16 +86,27 @@ export default function BookingForm({
                 type='text'
                 id='firstName'
                 name='firstName'
-                value={formData.firstName}
-                onChange={handleChange}
                 placeholder='  Zoro'
-                className='field'
+                className={`field ${
+                  errors.firstName && touched.firstName ? "field-error" : ""
+                } ${
+                  !errors.firstName && touched.firstName ? "field-success" : ""
+                }`}
               />
+              {!errors.firstName && touched.firstName && (
+                <span className='success-icon'>O</span>
+              )}
+              {errors.firstName && touched.firstName && (
+                <span className='error-icon'>X</span>
+              )}
               {/* Show error message if validation fails */}
-              {errors.firstName && touched.firstName ? (
-                <div className='error'>{errors.firstName}</div>
-              ) : null}
-              <ErrorMessage name='firstName' />
+              {touched.firstName && (
+                <ErrorMessage
+                  name='firstName'
+                  component='div'
+                  className='error'
+                />
+              )}
             </div>
 
             {/* LAST NAME */}
@@ -111,14 +118,27 @@ export default function BookingForm({
                 type='text'
                 id='lastName'
                 name='lastName'
-                value={formData.lastName}
-                onChange={handleChange}
                 placeholder='  Roronoa'
-                className='field'
-                minLength={2}
-                maxLength={50}
-                required
+                className={`field ${
+                  errors.lastName && touched.lastName ? "field-error" : ""
+                } ${
+                  !errors.lastName && touched.lastName ? "field-success" : ""
+                }`}
               />
+              {!errors.lastName && touched.lastName && (
+                <span className='success-icon'>O</span>
+              )}
+              {errors.lastName && touched.lastName && (
+                <span className='error-icon'>X</span>
+              )}
+              {/* Show error message if validation fails */}
+              {touched.lastName && (
+                <ErrorMessage
+                  name='lastName'
+                  component='div'
+                  className='error'
+                />
+              )}
             </div>
 
             {/* EMAIL */}
@@ -130,29 +150,48 @@ export default function BookingForm({
                 type='email'
                 id='email'
                 name='email'
-                value={formData.email}
-                onChange={handleChange}
                 placeholder='  Zoro.Roronoa@mail.de'
-                className='field'
-                minLength={5}
-                required
+                className={`field ${
+                  errors.email && touched.email ? "field-error" : ""
+                } ${!errors.email && touched.email ? "field-success" : ""}`}
               />
+              {!errors.email && touched.email && (
+                <span className='success-icon'>O</span>
+              )}
+              {errors.email && touched.email && (
+                <span className='error-icon'>X</span>
+              )}
+              {/* Show error message if validation fails */}
+              {touched.email && (
+                <ErrorMessage name='email' component='div' className='error' />
+              )}
             </div>
 
             {/* RESERVATION DATE */}
             <div className='reservationDate divField'>
-              <label htmlFor='date' className='formLabel'>
-                Choose date<span>*</span>
-              </label>
-              <Field
-                type='date'
-                id='date'
-                name='date'
-                className='field'
-                value={formData.date}
-                onChange={handleChange}
-                required
-              />
+              <div className='dateLabelField'>
+                <label htmlFor='date' className='formLabel'>
+                  Choose date<span>*</span>
+                </label>
+                <Field
+                  type='date'
+                  id='date'
+                  name='date'
+                  className={`field ${
+                    errors.date && touched.date ? "field-error" : ""
+                  } ${!errors.date && touched.date ? "field-success" : ""}`}
+                />
+                {!errors.date && touched.date && (
+                  <span className='success-icon'>O</span>
+                )}
+                {errors.date && touched.date && (
+                  <span className='error-icon'>X</span>
+                )}
+              </div>
+              {/* Show error message if validation fails */}
+              {touched.date && (
+                <ErrorMessage name='date' component='div' className='error' />
+              )}
             </div>
 
             {/* RESERVATION TIME */}
@@ -164,10 +203,9 @@ export default function BookingForm({
                 as='select'
                 id='time'
                 name='time'
-                className='field'
-                value={formData.time}
-                onChange={handleChange}
-                required
+                className={`field ${
+                  errors.time && touched.time ? "field-error" : ""
+                } ${!errors.time && touched.time ? "field-success" : ""}`}
               >
                 {reservationTimes.time.map((time) => (
                   <option key={time} value={time}>
@@ -175,6 +213,12 @@ export default function BookingForm({
                   </option>
                 ))}
               </Field>
+              {!errors.time && touched.time && (
+                <span className='success-icon'>O</span>
+              )}
+              {errors.time && touched.time && (
+                <span className='error-icon'>X</span>
+              )}
             </div>
 
             {/* SELECT OCCASION */}
@@ -186,9 +230,11 @@ export default function BookingForm({
                 as='select'
                 id='occasion'
                 name='occasion'
-                className='field'
-                value={formData.occasion}
-                onChange={handleChange}
+                className={`field ${
+                  errors.occasion && touched.occasion ? "field-error" : ""
+                } ${
+                  !errors.occasion && touched.occasion ? "field-success" : ""
+                }`}
               >
                 {occasion.map((occasion) => (
                   <option key={occasion.event} value={occasion.event}>
@@ -196,6 +242,20 @@ export default function BookingForm({
                   </option>
                 ))}
               </Field>
+              {!errors.occasion && touched.occasion && (
+                <span className='success-icon'>O</span>
+              )}
+              {errors.occasion && touched.occasion && (
+                <span className='error-icon'>X</span>
+              )}
+              {/* Show error message if validation fails */}
+              {touched.occasion && (
+                <ErrorMessage
+                  name='occasion'
+                  component='div'
+                  className='error'
+                />
+              )}
             </div>
 
             {/* SELECT NUMBER OF GUESTS*/}
@@ -206,19 +266,30 @@ export default function BookingForm({
               <Field
                 type='number'
                 name='guests'
-                placeholder='  1'
-                min='2'
-                max='10'
+                placeholder='  2'
                 id='guests'
-                className='field'
-                value={formData.guests}
-                onChange={handleChange}
-                required
+                className={`field ${
+                  errors.guests && touched.guests ? "field-error" : ""
+                } ${!errors.guests && touched.guests ? "field-success" : ""}`}
               />
+              {!errors.guests && touched.guests && (
+                <span className='success-icon'>O</span>
+              )}
+              {errors.guests && touched.guests && (
+                <span className='error-icon'>X</span>
+              )}
+              {/* Show error message if validation fails */}
+              {touched.guests && (
+                <ErrorMessage name='guests' component='div' className='error' />
+              )}
             </div>
 
             {/* BUTTON */}
-            <button type='submit' className='reservationSubmit'>
+            <button
+              type='submit'
+              name='reservationSubmitButton'
+              className='reservationSubmit'
+            >
               Submit
             </button>
           </Form>
