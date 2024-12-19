@@ -1,6 +1,6 @@
-import BookingFormTwo from "./components/Main/Booking/BookingForm";
+import BookingFormTwo from "./BookingForm";
 import { useState, useReducer, useEffect } from "react";
-import { fetchAPI, submitAPI } from "./utils/api";
+import { fetchAPI, submitAPI } from "../../../utils/api";
 import { useNavigate } from "react-router-dom";
 
 const today = new Date().toISOString().split("T")[0]; // Date of today
@@ -75,6 +75,7 @@ const initializeTimes = () => ({
 
 export default function Reservations() {
   const [state, dispatch] = useReducer(updateTimes, initializeTimes());
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const [formData, setFormData] = useState({
     firstName: "",
@@ -89,16 +90,11 @@ export default function Reservations() {
   const navigate = useNavigate();
 
   async function fetchAvailableTimes(date) {
-    console.log("Fetching available times for date:", date);
-
     try {
       const availableTimes = await fetchAPI(new Date(date));
-      console.log("API returned times:", availableTimes);
 
       dispatch({ type: "SET_TIMES", payload: availableTimes });
-    } catch (error) {
-      console.error("Error fetching available times:", error);
-    }
+    } catch (error) {}
   }
 
   useEffect(() => {
@@ -114,19 +110,21 @@ export default function Reservations() {
   }, [formData.date]);
 
   const handleSubmit = async (e) => {
+    await new Promise(
+      (resolve) => setTimeout(resolve, 10000),
+      setIsSubmitting(true)
+    );
     //e.preventDefault(); // Prevent page reload on form submission
-    console.log("Form submitted!");
     try {
-      const success = await submitAPI(formData);
+      const success = submitAPI(formData);
       if (success) {
-        console.log("Reservation successful!");
-
         navigate("/confirmBooking");
       } else {
-        console.log("Booking failed.");
       }
     } catch (error) {
       console.error("Submit error: ", error);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -169,7 +167,8 @@ export default function Reservations() {
         formData={formData}
         handleChange={handleChange}
         handleSubmit={handleSubmit}
-        reservationTimes={state}
+        reservationTimes={state.time}
+        isSubmitting={isSubmitting}
       />
     </>
   );

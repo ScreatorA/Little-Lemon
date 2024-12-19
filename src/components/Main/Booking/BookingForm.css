@@ -82,3 +82,41 @@ span {
 .success-icon {
   color: green;
 }
+
+/*Modern Browser Firefox, Google Chrome etc.*/
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Safari*/
+@-webkit-keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.spinner {
+  border: 3px solid #FBDAB6;
+  border-top: 3px solid #EE9972;
+  border-bottom: 3px solid #EE9972;
+  border-radius: 50%;
+  width: 14px;
+  height: 14px;
+  -webkit-animation: spin 3s linear infinite; /* Safari*/
+  animation: spin 10s linear infinite; /*Modern Browser Firefox, Google Chrome etc.*/
+  display: inline-block;
+  margin-right: 0.5rem;
+}
+
+.reservationSubmit:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}

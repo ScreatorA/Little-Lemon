@@ -8,6 +8,7 @@ export default function BookingForm({
   handleChange,
   handleSubmit,
   reservationTimes,
+  isSubmitting,
 }) {
   const occasion = [
     { event: "default", label: "Select an occasion" },
@@ -44,7 +45,7 @@ export default function BookingForm({
       .required("Date is Required!")
       .test(
         "future Date or present-Date",
-        `The date must either be ${new Date().toLocaleDateString()} or lay in the future  `,
+        `The date must either be ${new Date().toLocaleDateString()} or lay in the future`,
         (value) =>
           value &&
           new Date(value).setHours(0, 0, 0, 0) >=
@@ -59,8 +60,10 @@ export default function BookingForm({
         (value) => value && value !== "default"
       ),
 
-    guests: Yup.number().required("Guests number is Required!"),
-    //It needs further options like: If Occasion is Date Guests minimum must be 2, or just 2. If Occasion is Family Gathering than minimum guests must be 3( Here is the Question what is for Widows with only one Child it is also Family and the number of guests is 2 so it is not really good to do this) So it 2 is ok as I see. For everything except for Foodie it should be set to 2
+    guests: Yup.number()
+      .required("Guests number is Required!")
+      .min(1, "Guests needs to be at least 1")
+      .max(10, "Guests needs to be at most be 10"),
   });
 
   return (
@@ -68,13 +71,11 @@ export default function BookingForm({
       <Formik
         initialValues={formData}
         validationSchema={formValidationSchema}
-        onSubmit={(e) => {
-          console.log("Form" + { formValidationSchema });
-          return { handleSubmit };
-        }}
+        handleChange={handleChange}
+        onSubmit={handleSubmit}
         className='form'
       >
-        {({ errors, touched, values }) => (
+        {({ errors, touched, isValid, dirty }) => (
           <Form className='formContent'>
             <h1 className='formHeading'>Make a Reservation</h1>
             {/* FIRST NAME */}
@@ -105,6 +106,7 @@ export default function BookingForm({
                   name='firstName'
                   component='div'
                   className='error'
+                  data-testid='firstNameError'
                 />
               )}
             </div>
@@ -137,6 +139,7 @@ export default function BookingForm({
                   name='lastName'
                   component='div'
                   className='error'
+                  data-testid='lastNameError'
                 />
               )}
             </div>
@@ -163,7 +166,12 @@ export default function BookingForm({
               )}
               {/* Show error message if validation fails */}
               {touched.email && (
-                <ErrorMessage name='email' component='div' className='error' />
+                <ErrorMessage
+                  name='email'
+                  component='div'
+                  className='error'
+                  data-testid='emailError'
+                />
               )}
             </div>
 
@@ -177,6 +185,7 @@ export default function BookingForm({
                   type='date'
                   id='date'
                   name='date'
+                  d
                   className={`field ${
                     errors.date && touched.date ? "field-error" : ""
                   } ${!errors.date && touched.date ? "field-success" : ""}`}
@@ -190,7 +199,12 @@ export default function BookingForm({
               </div>
               {/* Show error message if validation fails */}
               {touched.date && (
-                <ErrorMessage name='date' component='div' className='error' />
+                <ErrorMessage
+                  name='date'
+                  component='div'
+                  className='error'
+                  data-testid='dateError'
+                />
               )}
             </div>
 
@@ -207,7 +221,7 @@ export default function BookingForm({
                   errors.time && touched.time ? "field-error" : ""
                 } ${!errors.time && touched.time ? "field-success" : ""}`}
               >
-                {reservationTimes.time.map((time) => (
+                {reservationTimes.map((time) => (
                   <option key={time} value={time}>
                     {time}
                   </option>
@@ -254,6 +268,7 @@ export default function BookingForm({
                   name='occasion'
                   component='div'
                   className='error'
+                  data-testid='occasionError'
                 />
               )}
             </div>
@@ -280,7 +295,12 @@ export default function BookingForm({
               )}
               {/* Show error message if validation fails */}
               {touched.guests && (
-                <ErrorMessage name='guests' component='div' className='error' />
+                <ErrorMessage
+                  name='guests'
+                  component='div'
+                  className='error'
+                  data-testid='guestsError'
+                />
               )}
             </div>
 
@@ -289,8 +309,16 @@ export default function BookingForm({
               type='submit'
               name='reservationSubmitButton'
               className='reservationSubmit'
+              data-testid= "submitButtonError"
+              disabled={isSubmitting || !(dirty && isValid)}
             >
-              Submit
+              {isSubmitting ? (
+                <>
+                  <span className='spinner'></span>Submitting...
+                </>
+              ) : (
+                "Submit"
+              )}
             </button>
           </Form>
         )}

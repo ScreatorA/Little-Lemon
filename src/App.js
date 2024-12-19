@@ -10,7 +10,7 @@ import Footer from "./components/Footer";
 import { Routes, Route, useLocation } from "react-router-dom";
 import About from "./components/Main/About";
 import Highlights from "./components/Main/Highlights";
-import Reservations from "./Reservations";
+import Reservations from "./components/Main/Booking/Reservations"
 import OrderOnline from "./OrderOnline";
 import Login from "./Login";
 import ConfirmBooking from "./components/Main/Booking/ConfirmBooking";
