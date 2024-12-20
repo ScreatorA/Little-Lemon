@@ -88,18 +88,26 @@ export default function BookingForm({
                 id='firstName'
                 name='firstName'
                 placeholder='  Zoro'
+                aria-describedby='firstNameError'
                 className={`field ${
                   errors.firstName && touched.firstName ? "field-error" : ""
                 } ${
                   !errors.firstName && touched.firstName ? "field-success" : ""
                 }`}
               />
-              {!errors.firstName && touched.firstName && (
-                <span className='success-icon'>O</span>
-              )}
-              {errors.firstName && touched.firstName && (
-                <span className='error-icon'>X</span>
-              )}
+              <div className='icon'>
+                {!errors.firstName && touched.firstName && (
+                  <span className='success-icon' aria-hidden='true'>
+                    O
+                  </span>
+                )}
+                {errors.firstName && touched.firstName && (
+                  <span className='error-icon' aria-hidden='true'>
+                    X
+                  </span>
+                )}
+              </div>
+
               {/* Show error message if validation fails */}
               {touched.firstName && (
                 <ErrorMessage
@@ -107,6 +115,7 @@ export default function BookingForm({
                   component='div'
                   className='error'
                   data-testid='firstNameError'
+                  aria-live='assertive'
                 />
               )}
             </div>
@@ -121,18 +130,25 @@ export default function BookingForm({
                 id='lastName'
                 name='lastName'
                 placeholder='  Roronoa'
+                aria-describedby='lastNameError'
                 className={`field ${
                   errors.lastName && touched.lastName ? "field-error" : ""
                 } ${
                   !errors.lastName && touched.lastName ? "field-success" : ""
                 }`}
               />
-              {!errors.lastName && touched.lastName && (
-                <span className='success-icon'>O</span>
-              )}
-              {errors.lastName && touched.lastName && (
-                <span className='error-icon'>X</span>
-              )}
+              <div className='icon'>
+                {!errors.lastName && touched.lastName && (
+                  <span className='success-icon' aria-hidden='true'>
+                    O
+                  </span>
+                )}
+                {errors.lastName && touched.lastName && (
+                  <span className='error-icon' aria-hidden='true'>
+                    X
+                  </span>
+                )}
+              </div>
               {/* Show error message if validation fails */}
               {touched.lastName && (
                 <ErrorMessage
@@ -140,6 +156,7 @@ export default function BookingForm({
                   component='div'
                   className='error'
                   data-testid='lastNameError'
+                  aria-live='assertive'
                 />
               )}
             </div>
@@ -154,16 +171,23 @@ export default function BookingForm({
                 id='email'
                 name='email'
                 placeholder='  Zoro.Roronoa@mail.de'
+                aria-describedby='emailError'
                 className={`field ${
                   errors.email && touched.email ? "field-error" : ""
                 } ${!errors.email && touched.email ? "field-success" : ""}`}
               />
-              {!errors.email && touched.email && (
-                <span className='success-icon'>O</span>
-              )}
-              {errors.email && touched.email && (
-                <span className='error-icon'>X</span>
-              )}
+              <div className='icon'>
+                {!errors.email && touched.email && (
+                  <span className='success-icon' aria-hidden='true'>
+                    O
+                  </span>
+                )}
+                {errors.email && touched.email && (
+                  <span className='error-icon' aria-hidden='true'>
+                    X
+                  </span>
+                )}
+              </div>
               {/* Show error message if validation fails */}
               {touched.email && (
                 <ErrorMessage
@@ -171,6 +195,7 @@ export default function BookingForm({
                   component='div'
                   className='error'
                   data-testid='emailError'
+                  aria-live='assertive'
                 />
               )}
             </div>
@@ -185,27 +210,34 @@ export default function BookingForm({
                   type='date'
                   id='date'
                   name='date'
-                  d
+                  aria-describedby='dateError'
                   className={`field ${
                     errors.date && touched.date ? "field-error" : ""
                   } ${!errors.date && touched.date ? "field-success" : ""}`}
                 />
-                {!errors.date && touched.date && (
-                  <span className='success-icon'>O</span>
-                )}
-                {errors.date && touched.date && (
-                  <span className='error-icon'>X</span>
+                <div className='icon'>
+                  {!errors.date && touched.date && (
+                    <span className='success-icon' aria-hidden='true'>
+                      O
+                    </span>
+                  )}
+                  {errors.date && touched.date && (
+                    <span className='error-icon' aria-hidden='true'>
+                      X
+                    </span>
+                  )}
+                </div>
+                {/* Show error message if validation fails */}
+                {touched.date && (
+                  <ErrorMessage
+                    name='date'
+                    component='div'
+                    className='error'
+                    data-testid='dateError'
+                    aria-live='assertive'
+                  />
                 )}
               </div>
-              {/* Show error message if validation fails */}
-              {touched.date && (
-                <ErrorMessage
-                  name='date'
-                  component='div'
-                  className='error'
-                  data-testid='dateError'
-                />
-              )}
             </div>
 
             {/* RESERVATION TIME */}
@@ -227,12 +259,18 @@ export default function BookingForm({
                   </option>
                 ))}
               </Field>
-              {!errors.time && touched.time && (
-                <span className='success-icon'>O</span>
-              )}
-              {errors.time && touched.time && (
-                <span className='error-icon'>X</span>
-              )}
+              <div className='icon'>
+                {!errors.time && touched.time && (
+                  <span className='success-icon' aria-hidden='true'>
+                    O
+                  </span>
+                )}
+                {errors.time && touched.time && (
+                  <span className='error-icon' aria-hidden='true'>
+                    X
+                  </span>
+                )}
+              </div>
             </div>
 
             {/* SELECT OCCASION */}
@@ -244,6 +282,7 @@ export default function BookingForm({
                 as='select'
                 id='occasion'
                 name='occasion'
+                aria-describedby='occasionError'
                 className={`field ${
                   errors.occasion && touched.occasion ? "field-error" : ""
                 } ${
@@ -256,12 +295,18 @@ export default function BookingForm({
                   </option>
                 ))}
               </Field>
-              {!errors.occasion && touched.occasion && (
-                <span className='success-icon'>O</span>
-              )}
-              {errors.occasion && touched.occasion && (
-                <span className='error-icon'>X</span>
-              )}
+              <div className='icon'>
+                {!errors.occasion && touched.occasion && (
+                  <span className='success-icon' aria-hidden='true'>
+                    O
+                  </span>
+                )}
+                {errors.occasion && touched.occasion && (
+                  <span className='error-icon' aria-hidden='true'>
+                    X
+                  </span>
+                )}
+              </div>
               {/* Show error message if validation fails */}
               {touched.occasion && (
                 <ErrorMessage
@@ -269,6 +314,7 @@ export default function BookingForm({
                   component='div'
                   className='error'
                   data-testid='occasionError'
+                  aria-live='assertive'
                 />
               )}
             </div>
@@ -283,16 +329,23 @@ export default function BookingForm({
                 name='guests'
                 placeholder='  2'
                 id='guests'
+                aria-describedby='guestsError'
                 className={`field ${
                   errors.guests && touched.guests ? "field-error" : ""
                 } ${!errors.guests && touched.guests ? "field-success" : ""}`}
               />
-              {!errors.guests && touched.guests && (
-                <span className='success-icon'>O</span>
-              )}
-              {errors.guests && touched.guests && (
-                <span className='error-icon'>X</span>
-              )}
+              <div className='icon'>
+                {!errors.guests && touched.guests && (
+                  <span className='success-icon' aria-hidden='true'>
+                    O
+                  </span>
+                )}
+                {errors.guests && touched.guests && (
+                  <span className='error-icon' aria-hidden='true'>
+                    X
+                  </span>
+                )}
+              </div>
               {/* Show error message if validation fails */}
               {touched.guests && (
                 <ErrorMessage
@@ -300,6 +353,7 @@ export default function BookingForm({
                   component='div'
                   className='error'
                   data-testid='guestsError'
+                  aria-live='assertive'
                 />
               )}
             </div>
@@ -309,12 +363,17 @@ export default function BookingForm({
               type='submit'
               name='reservationSubmitButton'
               className='reservationSubmit'
-              data-testid= "submitButtonError"
+              data-testid='submitButtonError'
+              aria-label='Submit'
+              aria-live='polite'
+              aria-busy={isSubmitting ? "true" : "false"}
+              aria-disabled={isSubmitting || !(dirty && isValid)}
               disabled={isSubmitting || !(dirty && isValid)}
             >
               {isSubmitting ? (
                 <>
-                  <span className='spinner'></span>Submitting...
+                  <span className='spinner' aria-hidden='true'></span>
+                  Submitting...
                 </>
               ) : (
                 "Submit"

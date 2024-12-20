@@ -1,18 +1,18 @@
 import "./App.css";
 import "./components/Main/Main.css";
-import "./components/Main/About.css";
-import "./components/Main/Hero.css";
-import "./components/Main/Highlights.css";
-import "./components/Main/Testimonials.css";
+import "./components/Main/About/About.css";
+import "./components/Main/Hero/Hero.css";
+import "./components/Main/Highlights/Highlights.css";
+import "./components/Main/Testimonials/Testimonials.css";
 import Header from "./components/Header";
 import Main from "./components/Main/Main";
 import Footer from "./components/Footer";
 import { Routes, Route, useLocation } from "react-router-dom";
-import About from "./components/Main/About";
-import Highlights from "./components/Main/Highlights";
+import About from "./components/Main/About/About";
+import Highlights from "./components/Main/Highlights/Highlights";
 import Reservations from "./components/Main/Booking/Reservations"
-import OrderOnline from "./OrderOnline";
-import Login from "./Login";
+import OrderOnline from "./components/OrderOnline";
+import Login from "./components/Login";
 import ConfirmBooking from "./components/Main/Booking/ConfirmBooking";
 
 function App() {

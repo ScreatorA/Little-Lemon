@@ -119,7 +119,6 @@ export default function Reservations() {
       const success = submitAPI(formData);
       if (success) {
         navigate("/confirmBooking");
-      } else {
       }
     } catch (error) {
       console.error("Submit error: ", error);

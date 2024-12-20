@@ -3,13 +3,13 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import "./App.css";
 import "./components/Main/Main.css";
-import "./components/Main/About.css";
-import "./components/Main/Hero.css";
-import "./components/Main/Highlights";
+import "./components/Main/About/About.css";
+import "./components/Main/Hero/Hero.css";
+import "./components/Main/Highlights/Highlights";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
-import { ChakraProvider, Box, Text } from "@chakra-ui/react";
+import { ChakraProvider } from "@chakra-ui/react";
 import { defaultSystem } from "@chakra-ui/react/preset";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
