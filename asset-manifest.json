@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/Little-Lemon/static/css/main.a1a07690.css",
+    "main.js": "/Little-Lemon/static/js/main.f73cbd78.js",
+    "static/js/488.66a58736.chunk.js": "/Little-Lemon/static/js/488.66a58736.chunk.js",
+    "static/media/MarkaziText-VariableFont_wght.ttf": "/Little-Lemon/static/media/MarkaziText-VariableFont_wght.526f74ab0f94c23b4047.ttf",
+    "static/media/Karla-VariableFont_wght.ttf": "/Little-Lemon/static/media/Karla-VariableFont_wght.1d835e644ae4118a28fc.ttf",
+    "index.html": "/Little-Lemon/index.html",
+    "main.a1a07690.css.map": "/Little-Lemon/static/css/main.a1a07690.css.map",
+    "main.f73cbd78.js.map": "/Little-Lemon/static/js/main.f73cbd78.js.map",
+    "488.66a58736.chunk.js.map": "/Little-Lemon/static/js/488.66a58736.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a1a07690.css",
+    "static/js/main.f73cbd78.js"
+  ]
+}
