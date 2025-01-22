@@ -1,6 +1,7 @@
 {
   "name": "little_lemon",
   "version": "0.1.0",
+  "homepage": "https://screatora.github.io/Little-Lemon/",
   "private": true,
   "dependencies": {
     "@chakra-ui/react": "^3.2.3",
